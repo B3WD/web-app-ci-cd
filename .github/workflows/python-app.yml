@@ -12,7 +12,6 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -29,6 +28,17 @@ jobs:
 
     - name: Install dependencies
       run: poetry install
-            
+
+    - name: Cache venv
+      uses: actions/cache@v4.0.2
+      with:
+        path: .venv
+        key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
+  
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
     - name: Test with pytest
       run: poetry run pytest
