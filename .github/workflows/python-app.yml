@@ -26,6 +26,9 @@ jobs:
     - name: Install Poetry Action
       uses: snok/install-poetry@v1.3.4
 
+    - name: Configure poetry
+      run: poetry config virtualenvs.in-project true
+
     - name: Cache venv
       uses: actions/cache@v4.0.2
       with:
