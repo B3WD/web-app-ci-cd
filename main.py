@@ -4,9 +4,22 @@ import time
 app = FastAPI()
 
 
+html_content = """
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World!</title>
+</head>
+<body>
+    <h1>Hello World</h1>
+    <button type="button">Hello world!</button>
+</body>
+</html>
+"""
+
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+  return HTMLResponse(content=html_content, media_type="text/html")
 
 @app.get("/items/{item_id}")
 async def read_item(item_id: int):
